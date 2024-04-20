@@ -44,9 +44,8 @@ const PostPage = () => {
           </Text>
         </Flex>
         <Divider borderColor={dividerColor} />
-        <Comments />
-        <Comments />
-        <Comments />
+        <Comments userAvatar={"https://bit.ly/dan-abramov"} createdAt={"1d"} comment={"This is dope!"} username={"dan_more"} likes={300} />
+        <Comments userAvatar={"https://bit.ly/dan-abramov"} createdAt={"1d"} comment={"This is dope!"} username={"dan_more"} likes={300} />
       </VStack>
     </>
   )
