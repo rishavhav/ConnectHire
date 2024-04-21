@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 import connectDB from "./db/connectDB.js"
 import cookieParser from "cookie-parser"
 import userRoutes from "./routes/userRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
 
 const app = express()
 dotenv.config() // to use .env file
@@ -19,7 +20,8 @@ app.use(cookieParser()) // to parse cookies
 
 //Routes
 
-app.get("/api/users", userRoutes)
+app.use("/users", userRoutes)
+app.use("/posts", postRoutes)
 
 app.listen(5000, () => {
   console.log(`Server is running on http://localhost:${PORT}`)

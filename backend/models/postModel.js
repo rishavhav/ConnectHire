@@ -1,6 +1,6 @@
-import { mongo, Mongoose } from "mongoose"
+import mongoose from "mongoose"
 
-const postSchema = Mongoose.Schema(
+const postSchema = mongoose.Schema(
   {
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -9,15 +9,16 @@ const postSchema = Mongoose.Schema(
     },
     text: {
       type: String,
-      maxLength: 1000,
-      required: true,
+      maxLength: 500,
     },
     img: {
       type: String,
     },
     likes: {
-      type: Number,
-      default: 0,
+      // array of user ids
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
     replies: [
       {
@@ -28,7 +29,6 @@ const postSchema = Mongoose.Schema(
         },
         text: {
           type: String,
-          maxLength: 200,
           required: true,
         },
         userProfilePic: {
@@ -36,12 +36,13 @@ const postSchema = Mongoose.Schema(
         },
         username: {
           type: String,
-          required: true,
         },
       },
     ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 )
 
 const Post = mongoose.model("Post", postSchema)
