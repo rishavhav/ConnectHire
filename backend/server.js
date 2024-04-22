@@ -20,8 +20,8 @@ app.use(cookieParser()) // to parse cookies
 
 //Routes
 
-app.use("/users", userRoutes)
-app.use("/posts", postRoutes)
+app.use("api/users", userRoutes)
+app.use("api/posts", postRoutes)
 
 app.listen(5000, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
