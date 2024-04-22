@@ -13,31 +13,30 @@ import { Navigate } from "react-router-dom"
 import LogoutButton from "./components/LogoutButton"
 import UpdateProfilePage from "./Pages/UpdateProfilePage"
 import CreatePost from "./components/CreatePost"
+import MyProfileButton from "./components/MyProfileButton"
 
 function App() {
   const user = useRecoilValue(userAtom)
-
-  const location = useLocation();
-  const containerWidth = location.pathname.includes("/landing") ? "screen" : "620px";
-  const containerPadding = location.pathname.includes("/landing") ? 0 : 4;
+  const location = useLocation()
+  const containerWidth = location.pathname.includes("/landing") ? "screen" : "620px"
+  const containerPadding = location.pathname.includes("/landing") ? 0 : 4
 
   return (
     <>
       <Container maxW={containerWidth} p={containerPadding}>
         {!location.pathname.includes("/landing") && <Header />}
         <Routes>
-          <Route path="/landing" element={<LandingPage />} />  // will work on this later
-
+          <Route path="/landing" element={<LandingPage />} /> // will work on this later
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
           <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
           <Route path="/update" element={user ? <UpdateProfilePage /> : <Navigate to="/auth" />} />
           <Route path="/:username" element={<UserPage />} />
           <Route path="/:username/post/:pid" element={<PostPage />} />
-
         </Routes>
 
         {user && <LogoutButton />}
         {user && <CreatePost />}
+        {user && <MyProfileButton />}
       </Container>
     </>
   )
