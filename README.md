@@ -18,5 +18,3 @@ You will need Node.js and npm installed on your computer. To check if you have t
 node -v
 npm -v
 
-
-![image](https://github.com/rishavhav/connectHire/assets/17833059/bb419318-6019-4755-96c8-48aaba78cafb)
