@@ -7,12 +7,19 @@ import cookieParser from "cookie-parser"
 import userRoutes from "./routes/userRoutes.js"
 import postRoutes from "./routes/postRoutes.js"
 import cors from "cors"
+import { v2 as cloudinary } from "cloudinary"
 
 const app = express()
 dotenv.config() // to use .env file
 connectDB() //  connect with db
 
 const PORT = process.env.PORT || 5000
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 // middleware to parse json and form data
 app.use(express.json()) // to parse json data in req.body
