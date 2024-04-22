@@ -11,6 +11,7 @@ import userAtom from "./atoms/userAtom"
 import HomePage from "./Pages/HomePage"
 import { Navigate } from "react-router-dom"
 import LogoutButton from "./components/LogoutButton"
+import UpdateProfilePage from "./Pages/UpdateProfilePage"
 
 function App() {
   const user = useRecoilValue(userAtom)
@@ -26,8 +27,9 @@ function App() {
         <Routes>
           <Route path="/landing" element={<LandingPage />} />  // will work on this later
 
-          <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
+          <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
+          <Route path="/update" element={user ? <UpdateProfilePage /> : <Navigate to="/auth" />} />
           <Route path="/:username" element={<UserPage />} />
           <Route path="/:username/post/:pid" element={<PostPage />} />
 
