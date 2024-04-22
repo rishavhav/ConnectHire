@@ -31,6 +31,7 @@ const getUserProfile = async (req, res) => {
 
 const signupUser = async (req, res) => {
   try {
+    console.log("=========================")
     const { name, email, username, password } = req.body
     const user = await User.findOne({ $or: [{ email }, { username }] })
 
