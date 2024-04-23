@@ -1,6 +1,6 @@
 export default function NavbarLanding() {
   return (
-    <div className="navbar bg-primary text-primary-content">
+    <div className="navbar bg-neutral  text-primary-content">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -16,7 +16,7 @@ export default function NavbarLanding() {
         <ul className="menu menu-horizontal px-1"></ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">About me</a>
+        <a className="btn" href="http://soamrish.pythonanywhere.com/" target="_blank">Developer</a>
       </div>
     </div>
   )
