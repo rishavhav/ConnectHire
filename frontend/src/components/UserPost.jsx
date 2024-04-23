@@ -47,7 +47,7 @@ const UserPost = ({ likesCount, commentsCount, postImage, postTitle }) => {
           <Actions liked={liked} setLiked={setLiked} />
           <Flex gap={2} alignItems={"center"}>
             <Text fontSize={"sm"} fontWeight={"bold"}>
-              {likesCount} likes
+              {liked ? likesCount + 1 : likesCount} likes
             </Text>
             <Text fontSize={"sm"} color={"gray.500"}>
               •
