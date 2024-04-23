@@ -11,8 +11,7 @@ const LandingPage = () => {
 
 
     <div className="relative h-screen w-full bg-white">
-      <div className="absolute h-[150%] w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
-        <NavbarLanding />
+      <div className="absolute h-[120%] w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
         <VStack className="h-screen">
           <Box>
             <Flex>

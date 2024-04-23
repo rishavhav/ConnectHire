@@ -5,7 +5,7 @@ import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => {
     return (
         <>
-            <footer className="flex justify-between footer p-10 bg-neutral text-neutral-content">
+            <footer className="flex justify-between footer p-10 bg-primary-content text-accent-content">
 
 
                 <nav >

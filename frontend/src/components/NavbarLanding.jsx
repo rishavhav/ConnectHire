@@ -1,6 +1,9 @@
+import { useColorMode } from '@chakra-ui/react'
+
 export default function NavbarLanding() {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <div className="navbar bg-neutral  text-primary-content ">
+    <div className="navbar bg-primary-content  text-primary-content ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -10,7 +13,7 @@ export default function NavbarLanding() {
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"></ul>
         </div>
-        <a className="btn btn-ghost text-xl">ConnectHire</a>
+        <a onClick={toggleColorMode} className="text-indigo-500 font-semibold  btn btn-ghost text-xl">ConnectHire</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1"></ul>

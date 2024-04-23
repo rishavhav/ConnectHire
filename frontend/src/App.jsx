@@ -14,6 +14,7 @@ import LogoutButton from "./components/LogoutButton"
 import UpdateProfilePage from "./Pages/UpdateProfilePage"
 import CreatePost from "./components/CreatePost"
 import MyProfileButton from "./components/MyProfileButton"
+import NavbarLanding from "./components/NavbarLanding"
 
 function App() {
   const user = useRecoilValue(userAtom)
@@ -22,9 +23,9 @@ function App() {
   const containerPadding = location.pathname.includes("/landing") ? 0 : 4
 
   return (
-    <>
+    <>{<NavbarLanding />}
       <Container maxW={containerWidth} p={containerPadding}>
-        {!location.pathname.includes("/landing") && <Header />}
+
         <Routes>
           <Route path="/landing" element={<LandingPage />} /> // will work on this later
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
