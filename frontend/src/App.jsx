@@ -34,9 +34,9 @@ function App() {
           <Route path="/:username/post/:pid" element={<PostPage />} />
         </Routes>
 
-        {user && <LogoutButton />}
-        {user && <CreatePost />}
-        {user && <MyProfileButton />}
+        {user && !location.pathname.includes("/landing") && <LogoutButton />}
+        {user && !location.pathname.includes("/landing") && <CreatePost />}
+        {user && !location.pathname.includes("/landing") && <MyProfileButton />}
       </Container>
     </>
   )
