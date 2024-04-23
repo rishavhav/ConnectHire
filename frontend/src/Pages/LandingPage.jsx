@@ -28,7 +28,7 @@ const LandingPage = () => {
           <Box>
             <Flex>
               <Box>
-                <h1 className="text-6xl font-bold text-center bg-gradient-to-r from-blue-400  to-indigo-700 text-transparent bg-clip-text">ConnectHire</h1>
+                <h1 className="text-7xl font-bold text-center bg-gradient-to-r from-blue-400  to-indigo-700 text-transparent bg-clip-text">ConnectHire</h1>
                 <p className="text-center text-2xl mt-5 ">
                   ConnectHire is a platform that connects <strong className="text-indigo-500">job seekers</strong> with <strong className="text-indigo-500">employers</strong>.
                 </p>
@@ -38,14 +38,19 @@ const LandingPage = () => {
           <Box>
             <Flex>
               <Box className="mt-5">
+
+
                 <Link to="/auth">
-                  <button className="btn text-white bg-gradient-to-r from-blue-400  to-indigo-700">Get Started →</button>
+                  <button className="btn text-white bg-gradient-to-r from-blue-400 to-indigo-700 transition-transform duration-200 ease-in-out transform hover:scale-110">
+                    Get Started →
+                  </button>
                 </Link>
+
               </Box>
             </Flex>
           </Box>
           <Box className="mt-10">
-            <Flex justifyContent={"center"} gap={5}>
+            <Flex justifyContent={"center"} gap={16}>
               <ChatDemo imgsrc={"/image.png"} question={"Tired of getting"} end={"ignored"} />
               <ChatDemo imgsrc={"/coin.jpg"} question={"Subscription"} end={"money"} />
               <ChatDemo imgsrc={"/reels2.jpg"} question={"Too many"} end={"distractions"} />
