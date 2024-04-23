@@ -3,11 +3,15 @@ import NavbarLanding from "../components/NavbarLanding"
 import { Link } from "react-router-dom"
 import { VStack, Flex, Box } from "@chakra-ui/react"
 import ChatDemo from "../components/ChatDemo"
+import Subscribe from "../components/Subscribe"
+import Footer from "../components/Footer"
 
 const LandingPage = () => {
   return (
+
+
     <div className="relative h-screen w-full bg-white">
-      <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
+      <div className="absolute h-[150%] w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
         <NavbarLanding />
         <VStack className="h-screen">
           <Box>
@@ -47,10 +51,16 @@ const LandingPage = () => {
               <ChatDemo imgsrc={"/reels2.jpg"} question={"Too many"} end={"distractions"} />
             </Flex>
           </Box>
+
+          <Subscribe />
+          <Footer />
         </VStack>
+
       </div>
     </div>
   )
 }
+
+
 
 export default LandingPage
