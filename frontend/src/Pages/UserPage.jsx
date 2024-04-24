@@ -1,78 +1,64 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import UserHeader from "../components/UserHeader"
-import UserPost from "../components/UserPost"
 import { useParams } from "react-router-dom"
 import useShowToast from "../hooks/useShowToast"
-import { useState } from "react"
-import { useRecoilValue } from "recoil"
-import userAtom from "../atoms/userAtom"
+import { Flex, Spinner } from "@chakra-ui/react"
+import Post from "../components/Post"
+import useGetUserProfile from "../hooks/useGetUserProfile"
+import { useRecoilState } from "recoil"
+import postsAtom from "../atoms/postsAtom"
 
 const UserPage = () => {
+  const { user, loading } = useGetUserProfile()
   const { username } = useParams()
-  const showToasts = useShowToast()
-  const [user, setUser] = useState(null)
-  const [posts, setPosts] = useState([])
-  const userData = useRecoilValue(userAtom)
+  const showToast = useShowToast()
+  const [posts, setPosts] = useRecoilState(postsAtom)
+  const [fetchingPosts, setFetchingPosts] = useState(true)
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await fetch(`/api/users/profile/${username}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        const data = await response.json()
-        if (data.error) {
-          showToasts("Error", data.error, "error")
-          return
-        }
-
-        console.log(data)
-        setUser(data)
-      } catch (error) {
-        showToasts("Error", error, "error")
-      }
-    }
-
     const getPosts = async () => {
+      if (!user) return
+      setFetchingPosts(true)
       try {
-        const response = await fetch(`/api/posts/user/${username}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        const data = await response.json()
-        if (data.error) {
-          showToasts("Error", data.error, "error")
-          return
-        }
+        const res = await fetch(`/api/posts/user/${username}`)
+        const data = await res.json()
+        console.log(data)
         setPosts(data)
-        console.log("data", data.length)
       } catch (error) {
-        showToasts("Error", error, "error")
+        showToast("Error", error.message, "error")
+        setPosts([])
+      } finally {
+        setFetchingPosts(false)
       }
     }
 
-    getUser()
     getPosts()
-  }, [username, showToasts, posts])
+  }, [username, showToast, setPosts, user])
 
-  if (!user) return null
+  if (!user && loading) {
+    return (
+      <Flex justifyContent={"center"}>
+        <Spinner size={"xl"} />
+      </Flex>
+    )
+  }
+
+  if (!user && !loading) return <h1>User not found</h1>
 
   return (
     <>
       <UserHeader user={user} />
 
-      {posts.length === 0 ? (
-        <div className="text-center mt-5">
-          <h1 className="text-2xl">No posts yet</h1>
-        </div>
-      ) : (
-        posts.map((post) => <UserPost key={post._id} likesCount={post.likes?.length} commentsCount={post.comments?.length} postImage={post.img} postTitle={post.text} />)
+      {!fetchingPosts && posts.length === 0 && <h1>User has not posts.</h1>}
+      {fetchingPosts && (
+        <Flex justifyContent={"center"} my={12}>
+          <Spinner size={"xl"} />
+        </Flex>
       )}
+
+      {posts.map((post) => (
+        <Post key={post._id} post={post} postedBy={post.postedBy} />
+      ))}
     </>
   )
 }

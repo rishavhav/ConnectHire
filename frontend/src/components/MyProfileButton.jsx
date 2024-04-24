@@ -15,10 +15,8 @@ const MyProfileButton = () => {
           window.location.href = `/${user.username}`
         }}
         cursor="pointer"
-        className="btn"
       >
         <Avatar size="sm" name={user.username} src={user.profilePic} mr={2} />
-        {user.username}
       </a>
     </>
   )

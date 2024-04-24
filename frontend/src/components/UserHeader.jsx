@@ -4,18 +4,22 @@ import { useColorModeValue } from "@chakra-ui/react"
 import { useRecoilValue } from "recoil"
 import userAtom from "../atoms/userAtom"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useShowToast from "../hooks/useShowToast"
 
 const UserHeader = ({ user }) => {
   const loggedInUser = useRecoilValue(userAtom)
   const [following, setFollowing] = useState(user.followers.includes(loggedInUser._id))
-  console.log("loggedInUser", loggedInUser)
+
   const postTabColor = useColorModeValue("1.5px solid black", "1.5px solid white")
   const repliesTabColor = useColorModeValue("1.5px solid gray", "1.5px solid gray")
   const showToasts = useShowToast()
   const [followersCount, setFollowersCount] = useState(user.followers.length)
   const [updating, setUpdating] = useState(false)
+
+  useEffect(() => {
+    console.log("loggedInUser", loggedInUser)
+  }, [loggedInUser])
 
   const handleFollowUnfollow = async () => {
     if (!loggedInUser) {

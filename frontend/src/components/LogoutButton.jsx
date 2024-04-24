@@ -24,7 +24,7 @@ const LogoutButton = () => {
       localStorage.removeItem("user-connecthire")
       setUser(null)
 
-      window.location.reload()
+      window.location.href = "/"
     } catch (error) {
       console.log(error)
     }
