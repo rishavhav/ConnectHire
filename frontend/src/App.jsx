@@ -10,10 +10,7 @@ import { useRecoilValue } from "recoil"
 import userAtom from "./atoms/userAtom"
 import HomePage from "./Pages/HomePage"
 import { Navigate } from "react-router-dom"
-import LogoutButton from "./components/LogoutButton"
 import UpdateProfilePage from "./Pages/UpdateProfilePage"
-import CreatePost from "./components/CreatePost"
-import MyProfileButton from "./components/MyProfileButton"
 import NavbarLanding from "./components/NavbarLanding"
 
 function App() {
@@ -23,9 +20,9 @@ function App() {
   const containerPadding = location.pathname.includes("/landing") ? 0 : 4
 
   return (
-    <>{<NavbarLanding />}
+    <>
+      {<NavbarLanding />}
       <Container maxW={containerWidth} p={containerPadding}>
-
         <Routes>
           <Route path="/landing" element={<LandingPage />} /> // will work on this later
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
@@ -34,10 +31,6 @@ function App() {
           <Route path="/:username" element={<UserPage />} />
           <Route path="/:username/post/:pid" element={<PostPage />} />
         </Routes>
-
-        {user && !location.pathname.includes("/landing") && <LogoutButton />}
-        {user && !location.pathname.includes("/landing") && <CreatePost />}
-        {user && !location.pathname.includes("/landing") && <MyProfileButton />}
       </Container>
     </>
   )

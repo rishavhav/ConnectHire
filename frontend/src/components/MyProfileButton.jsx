@@ -10,21 +10,16 @@ const MyProfileButton = () => {
 
   return (
     <>
-      {!location.pathname.includes(user.username) && (
-        <Button
-          bg={useColorModeValue("gray.200", "#101010")}
-          position="fixed"
-          top="30px"
-          left="30px"
-          size={"sm"}
-          onClick={() => {
-            window.location.href = `/${user.username}`
-          }}
-        >
-          <Avatar size="sm" name={user.username} src={user.profilePic} mr={2} />
-          {user.username}
-        </Button>
-      )}
+      <a
+        onClick={() => {
+          window.location.href = `/${user.username}`
+        }}
+        cursor="pointer"
+        className="btn"
+      >
+        <Avatar size="sm" name={user.username} src={user.profilePic} mr={2} />
+        {user.username}
+      </a>
     </>
   )
 }

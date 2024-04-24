@@ -1,6 +1,14 @@
-import { useColorMode } from '@chakra-ui/react'
+import { useColorMode } from "@chakra-ui/react"
+import { useRecoilValue } from "recoil"
+import userAtom from "../atoms/userAtom"
+import { Flex } from "@chakra-ui/react"
+import LogoutButton from "./LogoutButton"
+import CreatePost from "./CreatePost"
+import MyProfileButton from "./MyProfileButton"
 
 export default function NavbarLanding() {
+  const user = useRecoilValue(userAtom)
+
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <div className="navbar bg-primary-content  text-primary-content ">
@@ -13,13 +21,22 @@ export default function NavbarLanding() {
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"></ul>
         </div>
-        <a onClick={toggleColorMode} className="text-indigo-500 font-semibold  btn btn-ghost text-xl">ConnectHire</a>
+        <a onClick={toggleColorMode} className="text-indigo-500 font-semibold  btn btn-ghost text-xl">
+          ConnectHire
+        </a>
+        {user && <MyProfileButton />}
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1"></ul>
       </div>
       <div className="navbar-end">
-        <a className="btn" href="http://soamrish.pythonanywhere.com/" target="_blank">Developer</a>
+        <Flex justifyContent={"center"} gap={3}>
+          {user && <CreatePost />}
+          {user && <LogoutButton />}
+          <a className="btn" href="http://soamrish.pythonanywhere.com/" target="_blank">
+            Developer
+          </a>
+        </Flex>
       </div>
     </div>
   )
