@@ -28,8 +28,8 @@ function App() {
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
           <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
           <Route path="/update" element={user ? <UpdateProfilePage /> : <Navigate to="/auth" />} />
-          <Route path="/:username" element={<UserPage />} />
-          <Route path="/:username/post/:pid" element={<PostPage />} />
+          <Route path="/:username" element={user ? <UserPage /> : <Navigate to="/auth" />} />
+          <Route path="/:username/post/:pid" element={user ? <PostPage /> : <Navigate to="/auth" />} />
         </Routes>
       </Container>
     </>
