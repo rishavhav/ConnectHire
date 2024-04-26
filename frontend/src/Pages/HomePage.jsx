@@ -1,51 +1,62 @@
+import { Box, Flex, Spinner } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import useShowToast from "../hooks/useShowToast"
 import Post from "../components/Post"
-import { Flex, Spinner } from "@chakra-ui/react"
+import { useRecoilState } from "recoil"
+import postsAtom from "../atoms/postsAtom"
+import SuggestedUsers from "../components/SuggestedUsers"
 
 const HomePage = () => {
-  const showToast = useShowToast()
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useRecoilState(postsAtom)
   const [loading, setLoading] = useState(true)
-
+  const showToast = useShowToast()
   useEffect(() => {
-    const fetchFeed = async () => {
+    const getFeedPosts = async () => {
       setLoading(true)
+      setPosts([])
       try {
         const res = await fetch("/api/posts/feed")
         const data = await res.json()
-
-        if (data.error) throw new Error(data.error)
-
+        if (data.error) {
+          showToast("Error", data.error, "error")
+          return
+        }
+        console.log(data)
         setPosts(data)
       } catch (error) {
-        showToast({ type: "error", message: error.message })
+        showToast("Error", error.message, "error")
       } finally {
         setLoading(false)
       }
     }
-
-    fetchFeed()
-  }, [])
+    getFeedPosts()
+  }, [showToast, setPosts])
 
   return (
-    <>
-      {loading && (
-        <Flex justify={"center"}>
-          <Spinner size={"xl"} />
-        </Flex>
-      )}
+    <Flex gap="10" alignItems={"flex-start"}>
+      <Box flex={70}>
+        {!loading && posts.length === 0 && <h1>Follow some users to see the feed</h1>}
 
-      {!loading && posts.length === 0 && (
-        <Flex justify={"center"} align={"center"} h={"100vh"}>
-          <h1>Follow someone to see posts!</h1>
-        </Flex>
-      )}
+        {loading && (
+          <Flex justify="center">
+            <Spinner size="xl" />
+          </Flex>
+        )}
 
-      {posts.map((post) => (
-        <Post key={post._id} post={post} postedBy={post.postedBy} />
-      ))}
-    </>
+        {posts.map((post) => (
+          <Post key={post._id} post={post} postedBy={post.postedBy} />
+        ))}
+      </Box>
+      <Box
+        flex={30}
+        display={{
+          base: "none",
+          md: "block",
+        }}
+      >
+        <SuggestedUsers />
+      </Box>
+    </Flex>
   )
 }
 

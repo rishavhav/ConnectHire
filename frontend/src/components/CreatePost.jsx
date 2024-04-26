@@ -68,9 +68,9 @@ const CreatePost = () => {
 
   return (
     <>
-      <a className="btn" onClick={onOpen}>
-        <AddIcon size={"sm"} pr={1} /> Post
-      </a>
+      <Button position={"fixed"} bottom={10} right={5} bg={useColorModeValue("gray.300", "gray.dark")} onClick={onOpen} size={{ base: "sm", sm: "md" }}>
+        <AddIcon />
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

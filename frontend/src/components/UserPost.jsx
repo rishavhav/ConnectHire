@@ -1,59 +1,59 @@
-import { Link } from "react-router-dom"
-import { Flex, Avatar, Box, AvatarGroup, Text, Image } from "@chakra-ui/react"
+import { Avatar } from "@chakra-ui/avatar"
+import { Image } from "@chakra-ui/image"
+import { Box, Flex, Text } from "@chakra-ui/layout"
 import { BsThreeDots } from "react-icons/bs"
+import { Link } from "react-router-dom"
 import Actions from "./Actions"
 import { useState } from "react"
 
-const UserPost = ({ likesCount, commentsCount, postImage, postTitle }) => {
+const UserPost = ({ postImg, postTitle, likes, replies }) => {
   const [liked, setLiked] = useState(false)
-
   return (
-    <Link to={"/dan_abramov/post/1"}>
+    <Link to={"/markzuckerberg/post/1"}>
       <Flex gap={3} mb={4} py={5}>
         <Flex flexDirection={"column"} alignItems={"center"}>
-          <Avatar size={"md"} name="Dan abramov" src={"https://bit.ly/dan-abramov"} />
-          <Box w={"1px"} h={"full"} bg="gray.light" py={2}></Box>
+          <Avatar size="md" name="Mark Zuckerberg" src="/zuck-avatar.png" />
+          <Box w="1px" h={"full"} bg="gray.light" my={2}></Box>
           <Box position={"relative"} w={"full"}>
-            <AvatarGroup size="xs" max={2}>
-              <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-              <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
-              <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-              <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
-              <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-            </AvatarGroup>
+            <Avatar size="xs" name="John doe" src="https://bit.ly/dan-abramov" position={"absolute"} top={"0px"} left="15px" padding={"2px"} />
+            <Avatar size="xs" name="John doe" src="https://bit.ly/sage-adebayo" position={"absolute"} bottom={"0px"} right="-5px" padding={"2px"} />
+            <Avatar size="xs" name="John doe" src="https://bit.ly/prosper-baba" position={"absolute"} bottom={"0px"} left="4px" padding={"2px"} />
           </Box>
         </Flex>
         <Flex flex={1} flexDirection={"column"} gap={2}>
           <Flex justifyContent={"space-between"} w={"full"}>
             <Flex w={"full"} alignItems={"center"}>
               <Text fontSize={"sm"} fontWeight={"bold"}>
-                Dan abramov
+                markzuckerberg
               </Text>
               <Image src="/verified.png" w={4} h={4} ml={1} />
             </Flex>
             <Flex gap={4} alignItems={"center"}>
-              <Text fontSize={"sm"} color={"gray.light"}>
+              <Text fontStyle={"sm"} color={"gray.light"}>
                 1d
               </Text>
               <BsThreeDots />
             </Flex>
           </Flex>
-          <Text fontSize={"sm"}> {postTitle} </Text>
-          {postImage && (
+
+          <Text fontSize={"sm"}>{postTitle}</Text>
+          {postImg && (
             <Box borderRadius={6} overflow={"hidden"} border={"1px solid"} borderColor={"gray.light"}>
-              <Image src={postImage} w={"full"} objectFit={"cover"} />
+              <Image src={postImg} w={"full"} />
             </Box>
           )}
-          <Actions liked={liked} setLiked={setLiked} />
+
+          <Flex gap={3} my={1}>
+            <Actions liked={liked} setLiked={setLiked} />
+          </Flex>
+
           <Flex gap={2} alignItems={"center"}>
-            <Text fontSize={"sm"} fontWeight={"bold"}>
-              {liked ? likesCount + 1 : likesCount} likes
+            <Text color={"gray.light"} fontSize="sm">
+              {replies} replies
             </Text>
-            <Text fontSize={"sm"} color={"gray.500"}>
-              •
-            </Text>
-            <Text fontSize={"sm"} color={"gray.light"}>
-              {commentsCount} comments
+            <Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
+            <Text color={"gray.light"} fontSize="sm">
+              {likes} likes
             </Text>
           </Flex>
         </Flex>
