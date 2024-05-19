@@ -238,4 +238,20 @@ const freezeAccount = async (req, res) => {
   }
 }
 
-export { signupUser, loginUser, logoutUser, followUnFollowUser, updateUser, getUserProfile, getSuggestedUsers, freezeAccount }
+const searchUser = async (req, res) => {
+  try {
+    const { search } = req.body
+
+    const users = await User.find({
+      $or: [{ name: { $regex: search, $options: "i" } }, { username: { $regex: search, $options: "i" } }],
+    }).select("-password")
+
+    const filteredUsers = users.filter((user) => user._id.toString() !== req.user._id.toString())
+
+    res.status(200).json(filteredUsers)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
+
+export { signupUser, loginUser, logoutUser, followUnFollowUser, updateUser, getUserProfile, getSuggestedUsers, freezeAccount, searchUser }

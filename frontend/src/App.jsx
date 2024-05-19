@@ -12,6 +12,7 @@ import HomePage from "./Pages/HomePage"
 import { Navigate } from "react-router-dom"
 import UpdateProfilePage from "./Pages/UpdateProfilePage"
 import NavbarLanding from "./components/NavbarLanding"
+import SearchPage from "./Pages/SearchPage"
 
 function App() {
   const user = useRecoilValue(userAtom)
@@ -30,6 +31,7 @@ function App() {
           <Route path="/update" element={user ? <UpdateProfilePage /> : <Navigate to="/auth" />} />
           <Route path="/:username" element={user ? <UserPage /> : <Navigate to="/auth" />} />
           <Route path="/:username/post/:pid" element={user ? <PostPage /> : <Navigate to="/auth" />} />
+          <Route path="/search" element={user ? <SearchPage /> : <Navigate to="/auth" />} />
         </Routes>
       </Container>
     </>
