@@ -9,7 +9,7 @@ import Footer from "../components/Footer"
 const LandingPage = () => {
   return (
     <div className="flex flex-col min-h-screen w-full bg-white">
-      <div className="flex-1 w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
+      <div className="mb-10 flex-1 w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse at center,transparent 20%, #fff 90%)]">
         <VStack>
           <Box>
             <Flex>
