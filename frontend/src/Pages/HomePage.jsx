@@ -34,7 +34,7 @@ const HomePage = () => {
 
   return (
     <Flex gap="10" alignItems={"flex-start"}>
-      <Box flex={70}>
+      <Box marginLeft={10} flex={70} maxH={10}>
         {!loading && posts.length === 0 && <h1>Follow some users to see the feed</h1>}
 
         {loading && (

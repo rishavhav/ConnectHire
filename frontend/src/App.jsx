@@ -1,4 +1,3 @@
-import { Button } from "@chakra-ui/react"
 import { Container } from "@chakra-ui/react"
 import { Routes, Route, useLocation } from "react-router-dom"
 import UserPage from "./Pages/UserPage"
@@ -17,15 +16,23 @@ import SearchPage from "./Pages/SearchPage"
 function App() {
   const user = useRecoilValue(userAtom)
   const location = useLocation()
-  const containerWidth = location.pathname.includes("/landing") ? "screen" : "620px"
-  const containerPadding = location.pathname.includes("/landing") ? 0 : 4
+  let containerWidth = "620px"
+  let containerPadding = 4
+
+  if (location.pathname.includes("/landing")) {
+    containerWidth = "screen"
+    containerPadding = 0
+  } else if (location.pathname === "/") {
+    containerWidth = "50%"
+    containerPadding = 4
+  }
 
   return (
     <>
-      {<NavbarLanding />}
+      <NavbarLanding />
       <Container maxW={containerWidth} p={containerPadding}>
         <Routes>
-          <Route path="/landing" element={<LandingPage />} /> // will work on this later
+          <Route path="/landing" element={<LandingPage />} />
           <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
           <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
           <Route path="/update" element={user ? <UpdateProfilePage /> : <Navigate to="/auth" />} />

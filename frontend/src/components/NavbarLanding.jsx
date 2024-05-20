@@ -8,6 +8,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import searchAtom from "../atoms/searchAtom"
 import { useSetRecoilState } from "recoil"
+import { useColorMode } from "@chakra-ui/react"
+import { Box, Image, Switch, FormControl, FormLabel } from "@chakra-ui/react"
+import { useLocation } from "react-router-dom"
 
 export default function NavbarLanding() {
   const user = useRecoilValue(userAtom)
@@ -32,8 +35,13 @@ export default function NavbarLanding() {
       console.log("Error in searchUser: ", error.message)
     }
   }
+  const location = useLocation()
 
   console.log("search", search)
+  const { colorMode, toggleColorMode } = useColorMode()
+  const logoClickHandler = () => {
+    navigate("/")
+  }
 
   return (
     <>
@@ -49,9 +57,9 @@ export default function NavbarLanding() {
           </div>
           <Flex justifyContent={"center"} gap={2} alignItems={"center"}>
             {user && (
-              <a href="/" className="text-indigo-500 font-semibold  btn btn-ghost text-xl">
+              <button onClick={logoClickHandler} className="text-indigo-500 font-semibold  btn btn-ghost text-xl">
                 ConnectHire
-              </a>
+              </button>
             )}
             {user && <MyProfileButton />}
             {user && (
@@ -75,6 +83,12 @@ export default function NavbarLanding() {
         </div>
         <div className="navbar-end">
           <Flex justifyContent={"center"} gap={2}>
+            {!location.pathname.includes("/landing") && <FormControl display="flex" alignItems="center" ml={4}>
+              <FormLabel htmlFor="color-mode-switch" mb="0">
+              </FormLabel>
+              <Switch isChecked={colorMode === "dark"} onChange={toggleColorMode} />
+            </FormControl>
+            }
             {user && <CreatePost />}
             {user && <LogoutButton />}
             {!user && (
